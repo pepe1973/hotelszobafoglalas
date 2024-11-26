@@ -5,6 +5,7 @@ const Homescreen = () => {
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  
   useEffect(() => {
     const fgv = async () => {
       try {
@@ -33,7 +34,7 @@ const Homescreen = () => {
         ) : (
           rooms.map((room) => {
             return (
-              <div className="col-md-9 mt-2">
+              <div className="col-md-9 mt-2" key={room._id}>
                 <Room room={room} />
               </div>
             );

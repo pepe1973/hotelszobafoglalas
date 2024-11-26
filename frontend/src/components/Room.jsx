@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button, Carousel } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function Room({ room }) {
   const [show, setShow] = useState(false);
@@ -20,9 +21,15 @@ function Room({ room }) {
           <p>Type: {room.type}</p>
         </b>
         <div style={{ float: "right" }}>
+          <Link to={`/book/${room._id}`}>
+          <button className="btn btn-primary m-2" >
+            Foglalás
+          </button>
+          </Link>
           <button className="btn btn-primary" onClick={handleShow}>
             Részletek
           </button>
+          
         </div>
       </div>
       <Modal show={show} onHide={handleClose} size="lg">
@@ -33,7 +40,7 @@ function Room({ room }) {
           <Carousel>
             {room.imageurls.map((url) => {
               return (
-                <Carousel.Item>
+                <Carousel.Item key={url}>
                   <img className="d-block w-100 bigimg" src={url} />
                 </Carousel.Item>
               );
