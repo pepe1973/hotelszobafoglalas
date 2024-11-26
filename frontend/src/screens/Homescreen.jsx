@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Room from "../components/Room.jsx";
+import RoomContext from "../helpers/RoomContext.jsx";
+
 
 const Homescreen = () => {
-  const [rooms, setRooms] = useState([]);
+  // const [ szobak, setSzobak ] = useContext(RoomContext);
+  const [rooms, setRoom] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  
+
   useEffect(() => {
     const fgv = async () => {
       try {
@@ -14,7 +17,9 @@ const Homescreen = () => {
         if (data.ok) {
           const szobak = await data.json();
           console.log(szobak.rooms);
-          setRooms(szobak.rooms);
+          // setSzobak(szobak.rooms);
+          localStorage.setItem('rooms', JSON.stringify(szobak.rooms));
+          setRoom(szobak.rooms);
         }
       } catch (error) {
         console.log(error);

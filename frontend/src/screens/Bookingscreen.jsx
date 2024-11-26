@@ -3,41 +3,35 @@ import { useParams } from 'react-router-dom';
 
 
 const  Bookingscreen = () => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [room, setRoom] = useState(null);
+    const [szoba, setSzoba] = useState(null);
 
     const {roomid} = useParams();
-    console.log(roomid);
 
+    const rooms = JSON.parse(localStorage.getItem('rooms'));
+    console.log(rooms);
+    
+    console.log(roomid);
+    
+    const szobaT = rooms.filter(elem => elem._id === roomid);
+    console.log(szobaT[0]);
+    // setRoom(szoba[0]);
     useEffect(() => {
-      const fgv = async () => {
-          console.log('UseEffect');
-          try {
-            const data = await fetch("http://localhost:5000/api/rooms");
-    
-            if (data.ok) {
-              const szobak = await data.json();
-              console.log(szobak.rooms);
-              // setRoom(szobak.rooms);
-            }
-          } catch (error) {
-            console.log(error);
-          }
-        };
-    
-        fgv();
-      }, []);
+      setSzoba("almafa");
+      // setSzoba(szobaT[0]);
+    }, []);
 
     return (
         <div>
+          {szoba}
             {loading ? (<h1>Loading...</h1>) : error ? (<h1>Error...</h1>) : (<div>
 
                 <div className="row">
 
                     <div className="col-md-5">
-                        <h1>{room.name}</h1>
-                        <img src={room.imageurls[0]} className='bigimg' />
+                        {/* <h1>{szoba.name}</h1> */}
+                        {/* <img src={szoba.imageurls[0]} className='bigimg' /> */}
                     </div>
 
                     <div className="col-md-5">
@@ -48,7 +42,7 @@ const  Bookingscreen = () => {
                         <p>Név: </p>
                         <p>Ettől: </p>
                         <p>Eddig: </p>
-                        <p>Max count: {room.maxcount}</p>
+                        {/* <p>Max count: {szoba.maxcount}</p> */}
                         </b>
 
                     </div>
