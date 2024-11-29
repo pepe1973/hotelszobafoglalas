@@ -31,7 +31,7 @@ const Register = () => {
               <input type="text" className='form-control' placeholder='name' value={name} onChange={(e)=>{setname(e.target.value)}}/>
               <input type="text" className='form-control' placeholder='email' value={email} onChange={(e)=>{setemail(e.target.value)}} />
               <input type="text" className='form-control' placeholder='password' value={password} onChange={(e)=>{setpassword(e.target.value)}}/>
-              <input type="text" className='form-control' placeholder='confirm passwrod' value={cpassword} onChange={(e)=>{setcpassword(e.target.value)}}/>
+              <input type="text" className='form-control' placeholder='confirm password' value={cpassword} onChange={(e)=>{setcpassword(e.target.value)}}/>
 
               <br />
 
