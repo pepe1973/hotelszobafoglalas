@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const Bookingscreen = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [room, setRoom] = useState({ imgurls: [] });
+  const [room, setRoom] = useState({});
 
   const { roomid } = useParams();
-  console.log(room.imgurls[0]);
+
 
   useEffect(() => {
     const fgv = async () => {
@@ -39,26 +40,19 @@ const Bookingscreen = () => {
   }, [roomid]);
 
   return (
-    <div>
+    <div className="m-5">
       {loading ? (
-        <h1>Loading...</h1>
-      ) : error ? (
-        <h1>Error...</h1>
-      ) : (
+        <Loader/>
+      ) : room ? (
         <div>
-          <div className="row">
-            <div className="col-md-5">
+          <div className="row justify-content-center mt-5 bs">
+            <div className="col-md-7">
               <h1>{room.name}</h1>
-              {/* <img src={room.imgurls[0]} className="bigimg" /> */}
-              {room.imgurls && room.imgurls.length > 0 ? (
-                <img src={room.imgurls[0]} className="bigimg" alt={room.name} />
-              ) : (
-                <p>No image available</p> // Hibaüzenet, ha nincs kép
-              )}
+              <img src={room.imageurls[0]} className="bigimg" />
             </div>
 
             <div className="col-md-5">
-              <div>
+              <div style={{textAlign: 'right'}}>
                 <h1>Booking Details</h1>
                 <hr />
 
@@ -68,21 +62,28 @@ const Bookingscreen = () => {
                   <p>Eddig: </p>
                   <p>Max count: {room.maxcount}</p>
                 </b>
+                </div>
+
+                <div style={{textAlign: 'right'}}>
                 <b>
                   <h1>Amount</h1>
                   <hr />
                   <p>Total days: </p>
-                  <p>Rent per days: </p>
+                  <p>Rent per days: {room.rentperday}</p>
                   <p>Total amount</p>
                 </b>
               </div>
-              <div style={{ float: "left" }}>
+
+              <div style={{ float: "right" }}>
                 <button className="btn btn-primary">Fizetés</button>
               </div>
+
             </div>
+
           </div>
-        </div>
-      )}
+
+        </div>) : (<Error/>)}
+      
     </div>
   );
 };

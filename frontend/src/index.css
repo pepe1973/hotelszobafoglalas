@@ -35,6 +35,7 @@ code {
 h1 {
   font-size: 20px !important;
 }
+
 .btn {
   background-color: black !important;
   color: white !important;
@@ -46,9 +47,21 @@ h1 {
   margin-top: 20px !important;
   border-radius: 5px !important;
   padding: 20px !important;
+
 }
 
-.bigimg {
-  height: 500px !important;
+.bigimg { 
+  height: 410px !important;
   border-radius: 5px !important;
+}
+
+input {
+  box-shadow: none !important;
+  margin-top: 5px !important;
+  border: 1 px solid black !important;
+}
+
+h2{
+  padding-bottom: 10px;
+  font-weight: bold;
 }

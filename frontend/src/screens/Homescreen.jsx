@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import Loader from "../components/Loader.jsx";
 import Room from "../components/Room.jsx";
 
 const Homescreen = () => {
@@ -29,13 +30,13 @@ const Homescreen = () => {
     <div className="container">
       <div className="row justify-content-center mt-5">
         {loading ? (
-          <h1>Loading....</h1>
+          <Loader/>
         ) : error ? (
-          <h1>Error</h1>
+          <Error/>
         ) : (
           rooms.map((room) => {
             return (
-              <div className="col-md-9 mt-2" key={room._id}>
+              <div className="col-md-9 mt-3">
                 <Room room={room} />
               </div>
             );
