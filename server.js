@@ -13,7 +13,7 @@ const usersRoute = require("./routes/usersRoutes")
 app.use(express.json())
 
 app.use("/api/rooms", roomsRoute);
-app.use("/api/user", usersRoute);
+app.use("/api/users", usersRoute);
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);

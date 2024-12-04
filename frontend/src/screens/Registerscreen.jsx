@@ -16,7 +16,7 @@ const Register = () => {
         cpassword
       }
       try {
-        const result = await axios.post('http://localhost:5000/api/user', user).data
+        const result = await axios.post('http://localhost:5000/api/users/register', user).data
       } catch (error) {
         console.log(error)
       }
