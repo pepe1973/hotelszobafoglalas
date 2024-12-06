@@ -1,11 +1,12 @@
 import React from "react";
 
 const Navbar = () => {
-  const user = JSON.parse(localStorage.getItem('currentUser'));
+  const user = JSON.parse(localStorage.getItem("currentUser"));
   function logout() {
-    localStorage.removeItem('currentUser')
-    window.location.href='/login'
+    localStorage.removeItem("currentUser");
+    window.location.href = "/login";
   }
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -21,19 +22,39 @@ const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon" style={{color: "white"}}><i class="fa-solid fa-bars"></i></span>
+          <span className="navbar-toggler-icon" style={{ color: "white" }}>
+            <i className="fa-solid fa-bars"></i>
+          </span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav mr-5">
             {user ? (
               <>
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    {user.name}
+                <div className="dropdown">
+                  <button
+                    className="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i class="fa fa-user"></i>
+                    {user.user.name}
                   </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Foglalások</a></li>
-                    <li><a class="dropdown-item" href="#">Kijelentkezés</a></li>
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton1"
+                  >
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        Foglalások
+                      </a>
+                    </li>
+                    <li>
+                      <a className="dropdown-item" href="#" onClick={logout}>
+                        Kijelentkezés
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </>
@@ -49,8 +70,8 @@ const Navbar = () => {
                     Belépés
                   </a>
                 </li>
-
-              </>)}
+              </>
+            )}
           </ul>
         </div>
       </div>

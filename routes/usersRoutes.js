@@ -24,7 +24,7 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ email: email });
     console.log(user);
     if (user) {
-      res.status(200).json({ msg: "Sikeres belépés!" });
+      res.status(200).json({ msg: "Sikeres belépés!", user });
     } else {
       return res.status(400).json({ msg: "Login failed" });
     }

@@ -19,21 +19,20 @@ const Loginscreen = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-
       });
 
       const result = await response.json();
-      setLoading(false);
 
-      localStorage.setItem('currentUser', JSON.stringify(result));
-      window.location.href='/'
-
-      // console.log(result);
+      console.log(result);
 
       if (response.ok) {
         alert("Sikeres bejelentkezés!");
+        setLoading(false);
+        localStorage.setItem("currentUser", JSON.stringify(result));
+        window.location.href = "/";
       } else {
         alert(result.msg);
+        setLoading(false);
       }
     };
 

@@ -14,7 +14,6 @@ const Homescreen = () => {
 
         if (data.ok) {
           const szobak = await data.json();
-          console.log(szobak.rooms);
           localStorage.setItem("rooms", JSON.stringify(szobak.rooms));
           setRoom(szobak.rooms);
         }
@@ -30,9 +29,9 @@ const Homescreen = () => {
     <div className="container">
       <div className="row justify-content-center mt-5">
         {loading ? (
-          <Loader/>
+          <Loader />
         ) : error ? (
-          <Error/>
+          <Error />
         ) : (
           rooms.map((room) => {
             return (
