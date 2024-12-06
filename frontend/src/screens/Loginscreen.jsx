@@ -12,17 +12,23 @@ const Loginscreen = () => {
     e.preventDefault();
 
     const login = async () => {
+      setLoading(true);
       const response = await fetch("http://localhost:5000/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-      });
-      console.log("Hello");
-      const result = await response.json();
 
-      console.log(result);
+      });
+
+      const result = await response.json();
+      setLoading(false);
+
+      localStorage.setItem('currentUser', JSON.stringify(result));
+      window.location.href='/'
+
+      // console.log(result);
 
       if (response.ok) {
         alert("Sikeres bejelentkezés!");
@@ -39,7 +45,7 @@ const Loginscreen = () => {
       {loading && <Loader />}
       <div className="row justify-content-center mt-5">
         <div className="col-md-5 mt-5">
-          {error && <Error message="Nem léteik ilyen felhasználó" />}
+          {error && <Error message="Nem létezik ilyen felhasználó" />}
           <div className="bs">
             <h2>Bejelentkezés</h2>
             <input
