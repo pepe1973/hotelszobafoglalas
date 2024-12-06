@@ -2,6 +2,10 @@ import React from "react";
 
 const Navbar = () => {
   const user = JSON.parse(localStorage.getItem('currentUser'));
+  function logout() {
+    localStorage.removeItem('currentUser')
+    window.location.href='/login'
+  }
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -17,10 +21,10 @@ const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon" style={{color: "white"}}><i class="fa-solid fa-bars"></i></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav mr-5">
             {user ? (
               <>
                 <div class="dropdown">
