@@ -1,12 +1,18 @@
 import { useState, useEffect, useContext } from "react";
 import Loader from "../components/Loader.jsx";
 import Room from "../components/Room.jsx";
+import { DatePicker, Space } from 'antd';
+import moment from "moment";
+
+const { RangePicker } = DatePicker;
 
 const Homescreen = () => {
   const [rooms, setRoom] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
+  const [fromdate , setfromdate] = useState();
+  const [todate , settodate] = useState();
+  
   useEffect(() => {
     const fgv = async () => {
       try {
@@ -25,8 +31,23 @@ const Homescreen = () => {
     fgv();
   }, []);
 
+  function filterByDate(dates){
+    setfromdate(moment(dates[0].$d).format('DD-MM-YYYY'))
+    settodate(moment(dates[1].$d).format('DD-MM-YYYY'))
+    
+  }
+
   return (
     <div className="container">
+
+        <div className="row">
+          <div className="col-md-3">
+
+          <RangePicker format='DD-MM-YYYY' onChange={filterByDate}/>
+
+          </div>
+        </div>
+
       <div className="row justify-content-center mt-5">
         {loading ? (
           <Loader />
@@ -35,8 +56,8 @@ const Homescreen = () => {
         ) : (
           rooms.map((room) => {
             return (
-              <div className="col-md-9 mt-3">
-                <Room room={room} />
+              <div className="col-md-9 mt-3" key={room.id}>
+                <Room room={room} fromdate={fromdate} todate={todate} ricsi="ricsi" />
               </div>
             );
           })

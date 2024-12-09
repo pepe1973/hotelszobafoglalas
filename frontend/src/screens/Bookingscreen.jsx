@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 
-const Bookingscreen = () => {
+const Bookingscreen = ({}) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [room, setRoom] = useState({});
 
-  const { roomid } = useParams();
+  const { roomid, fromdate, todate } = useParams();
 
 
   useEffect(() => {
@@ -58,8 +58,8 @@ const Bookingscreen = () => {
 
                 <b>
                   <p>Név: </p>
-                  <p>Ettől: </p>
-                  <p>Eddig: </p>
+                  <p>Ettől: {fromdate}</p>
+                  <p>Eddig: {todate}</p>
                   <p>Max count: {room.maxcount}</p>
                 </b>
                 </div>
