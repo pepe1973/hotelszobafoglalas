@@ -14,6 +14,7 @@ const Bookingscreen = ({}) => {
   const toDate = moment(todate, 'DD-MM-YYYY')
 
   const totaldays = moment.duration(toDate.diff(fromDate)).asDays()
+  const totalamount = totaldays * room.rentperday
 
   useEffect(() => {
     const fgv = async () => {
@@ -43,6 +44,25 @@ const Bookingscreen = ({}) => {
 
     fgv();
   }, [roomid]);
+
+function bookRoom() {
+  const bookingDetails = {
+
+    room ,
+    user:JSON.parse(localStorage.getItem('currentUsers'))._id,
+    fromdate,
+    todate,
+    totalamount,
+    totaldays
+  }
+
+  try {
+    const result = fetch.post("/api/bookings/bookroom",  bookingDetails)
+  } catch (error) {
+    
+  }
+
+}
 
   return (
     <div className="m-5">
@@ -75,7 +95,7 @@ const Bookingscreen = ({}) => {
                   <hr />
                   <p>Total days: {totaldays}</p>
                   <p>Rent per days: {room.rentperday}</p>
-                  <p>Total amount</p>
+                  <p>Total amount: {totalamount}</p>
                 </b>
               </div>
 
