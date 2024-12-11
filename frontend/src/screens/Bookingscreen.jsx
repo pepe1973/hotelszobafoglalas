@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import moment from "moment";
+import axios from "axios";
 
 const Bookingscreen = ({}) => {
   const [loading, setLoading] = useState(true);
@@ -10,11 +11,11 @@ const Bookingscreen = ({}) => {
 
   const { roomid, fromdate, todate } = useParams();
 
-  const fromDate = moment(fromdate, 'DD-MM-YYYY')
-  const toDate = moment(todate, 'DD-MM-YYYY')
+  const fromDate = moment(fromdate, "DD-MM-YYYY");
+  const toDate = moment(todate, "DD-MM-YYYY");
 
-  const totaldays = moment.duration(toDate.diff(fromDate)).asDays()
-  const totalamount = totaldays * room.rentperday
+  const totaldays = moment.duration(toDate.diff(fromDate)).asDays();
+  const totalamount = totaldays * room.rentperday;
 
   useEffect(() => {
     const fgv = async () => {
@@ -45,29 +46,38 @@ const Bookingscreen = ({}) => {
     fgv();
   }, [roomid]);
 
-function bookRoom() {
-  const bookingDetails = {
+  async function bookRoom() {
+    const bookingDetails = {
+      room,
+      userid: JSON.parse(localStorage.getItem("currentUser"))._id,
+      fromdate,
+      todate,
+      totalamount,
+      totaldays,
+    };
 
-    room ,
-    user:JSON.parse(localStorage.getItem('currentUsers'))._id,
-    fromdate,
-    todate,
-    totalamount,
-    totaldays
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/bookings/bookroom",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ bookingDetails }),
+        }
+      );
+      const result = await response.json();
+      console.log(resolve);
+    } catch (error) {
+      console.log("Nem sikerült rendelést felvenni!");
+    }
   }
-
-  try {
-    const result = fetch.post("/api/bookings/bookroom",  bookingDetails)
-  } catch (error) {
-    
-  }
-
-}
 
   return (
     <div className="m-5">
       {loading ? (
-        <Loader/>
+        <Loader />
       ) : room ? (
         <div>
           <div className="row justify-content-center mt-5 bs">
@@ -77,7 +87,7 @@ function bookRoom() {
             </div>
 
             <div className="col-md-5">
-              <div style={{textAlign: 'right'}}>
+              <div style={{ textAlign: "right" }}>
                 <h1>Booking Details</h1>
                 <hr />
 
@@ -87,9 +97,9 @@ function bookRoom() {
                   <p>Eddig: {todate}</p>
                   <p>Max count: {room.maxcount}</p>
                 </b>
-                </div>
+              </div>
 
-                <div style={{textAlign: 'right'}}>
+              <div style={{ textAlign: "right" }}>
                 <b>
                   <h1>Amount</h1>
                   <hr />
@@ -100,15 +110,16 @@ function bookRoom() {
               </div>
 
               <div style={{ float: "right" }}>
-                <button className="btn btn-primary">Fizetés</button>
+                <button className="btn btn-primary" onClick={bookRoom}>
+                  Fizetés
+                </button>
               </div>
-
             </div>
-
           </div>
-
-        </div>) : (<Error/>)}
-      
+        </div>
+      ) : (
+        <Error />
+      )}
     </div>
   );
 };

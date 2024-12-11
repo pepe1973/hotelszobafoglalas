@@ -15,11 +15,10 @@ app.use(express.json());
 
 app.use("/api/rooms", roomsRoute);
 app.use("/api/users", usersRoute);
-app.use("api/bookings", bookingsRoute)
+app.use("/api/bookings", bookingsRoute);
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 });
 
-
-//  ep: 20, szar, nem működik, egy geci buzi ez a fostenger el kéne pusztítani a gyászba
+//  ep: 20,
