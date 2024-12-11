@@ -1,18 +1,19 @@
-const { connect } = require("http2");
-const mongoose = require("mongoose");
+require('dotenv').config();
+const { connect } = require('http2');
+const mongoose = require('mongoose');
 
-var mongoURL = 'mongodb+srv://kissbalazs:Start123@cluster0.gdpmr.mongodb.net/mern-rooms'
+var mongoURL = process.env.MONGO_URI;
 
-mongoose.connect(mongoURL)
+mongoose.connect(mongoURL);
 
-var connection = mongoose.connection
+var connection = mongoose.connection;
 
-connection.on('error', ()=>{
+connection.on('error', () => {
     console.log('A Mongo DB csatlakozás sikertlen');
-})
+});
 
-connection.on('connected', ()=>{
+connection.on('connected', () => {
     console.log('A Mongo DB csatlakozás sikeres');
-})
+});
 
-module.exports = mongoose
+module.exports = mongoose;

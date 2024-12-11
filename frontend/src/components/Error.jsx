@@ -1,13 +1,16 @@
-import React from 'react'
+import React from 'react';
 
-const Error = ({message}) => {
-  return (
-    <div>
-        <div class='alert alert-danger' role="alert">
-            {message}
+const Error = ({ message }) => {
+    return (
+        <div>
+            <div
+                className="alert alert-danger"
+                role="alert"
+            >
+                {message}
+            </div>
         </div>
-    </div>
-  )
-}
+    );
+};
 
-export default Error
+export default Error;
