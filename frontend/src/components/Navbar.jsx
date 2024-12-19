@@ -57,7 +57,7 @@ const Navbar = () => {
                                         <li>
                                             <a
                                                 className="dropdown-item"
-                                                href="#"
+                                                href="/bookings"
                                             >
                                                 Foglalások
                                             </a>
